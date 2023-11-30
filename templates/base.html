@@ -25,11 +25,11 @@
                         <label for="itinerarios">Itinerarios:</label>
                         <select class="form-control" id="itinerarios">
                             <option value="Seleccionar ciudad" disable>Seleccionar ciudad</option>
-                            {% for parada in paradas %}
-                                
-                                <option value="{{itinerario.codigo}}">{{parada.itinerario_codigo.origen}}</option>
+                            {% for itinerario in itinerarios %}
+                                <option value="{{ itinerario.codigo }}">
+                                    {{ itinerario.origen }} a {{ itinerario.destino }}
+                                </option>
                             {% endfor %}
-                            <!-- Agrega más opciones según sea necesario -->
                         </select>
                     </div>
 
