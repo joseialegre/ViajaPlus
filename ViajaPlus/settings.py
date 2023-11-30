@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'ViajaPlus.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'viajaplus',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'bub2hoobeupkmqfwhji4',
+        'USER': 'uidsh5emlx1jj8rv',
+        'PASSWORD': 'WycTnga1xBpEJGwiZTvZ',
+        'HOST': 'bub2hoobeupkmqfwhji4-mysql.services.clever-cloud.com',
+        'PORT':'3306',
     }
 }
 

@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import *
+
+
+admin.site.register(Ciudad)
+admin.site.register(Itinerario)
+admin.site.register(Parada)
+admin.site.register(Pasaje)
+admin.site.register(Servicio)
+admin.site.register(Transporte)
