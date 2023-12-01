@@ -43,8 +43,24 @@
                 </div>
                 <!-- <input class="form-control-sm" type="password" placeholder="Password">
                 <input class="form-control-sm" type="button" value="Sign in"> -->
+                <button type="button" id="reservar-btn" class="btn btn-primary">Reservar</button>   
             </form>
-            
+            <script>
+                document.getElementById('reservar-btn').addEventListener('click', function () {
+            var itinerarioId = document.getElementById('itinerarios').value;
+            //var origenPosicion = document.getElementById('origen').value;
+            //var destinoPosicion = document.getElementById('destino').value;
+    
+            fetch('/obtener_servicios_itinerarios/' + itinerarioId + '/')
+                .then(response => response.json())
+                .then(data => {
+                    data.servicios.forEach(function (servicio){
+                        alert('Servicio: ' + servicio.numero_servicio + ', Partida: ' + servicio.fecha_partida + ', Llegada: ' + servicio.fecha_llegada);
+                    })
+                })
+                .catch(error => console.error('Error:', error));
+                });
+            </script>
             
         </div>
 
@@ -82,6 +98,7 @@
                     </div>
 
                     <button type="button" id="reservar-btn" class="btn btn-primary">Reservar</button>
+                    
                 </form>
             </div>
         </div> -->
