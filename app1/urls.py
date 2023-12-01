@@ -1,6 +1,9 @@
 from django.urls import path
-from .views import my_view  # Asegúrate de importar tu vista correctamente
+from .views import my_view, obtener_paradas_intermedias, obtener_servicios_itinerarios
 
 urlpatterns = [
     path('', my_view, name='home'),
+    
+    path('obtener_paradas_intermedias/<int:itinerario_id>/', obtener_paradas_intermedias, name='obtener_paradas_intermedias'),
+    path('obtener_servicios_itinerarios/<int:itinerario_id>/', obtener_servicios_itinerarios, name='obtener_servicios_itinerarios'),
 ]
