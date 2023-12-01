@@ -7,37 +7,35 @@ class Ciudad(models.Model):
         return self.nombre
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ciudad'
 
 
 class Itinerario(models.Model):
     codigo = models.IntegerField(primary_key=True)
-    horario_partida = models.TimeField(blank=True, null=True)
-    horario_llegada = models.TimeField(blank=True, null=True)
-    origen = models.ForeignKey(Ciudad, models.DO_NOTHING, db_column='origen')
-    destino = models.ForeignKey(Ciudad, models.DO_NOTHING, db_column='destino', related_name='itinerario_destino_set')
+    nombre = models.CharField(max_length=100)
 
     def __str__(self):
         return str(self.codigo)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'itinerario'
 
 
 class Parada(models.Model):
     itinerario = models.ForeignKey(Itinerario, models.DO_NOTHING, db_column='itinerario_codigo')
     ciudad_nombre = models.ForeignKey(Ciudad, models.DO_NOTHING, db_column='ciudad_nombre')
-    posicion = models.CharField(max_length=45, blank=True, null=True)
+    posicion = models.IntegerField(null=False)
 
     def __str__(self):
         return str(self.ciudad_nombre)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'parada'
         unique_together = (('itinerario', 'ciudad_nombre'),)
+        auto_created = True
 
 
 class Pasaje(models.Model):
@@ -49,7 +47,7 @@ class Pasaje(models.Model):
         return str(self.idpasaje)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'pasaje'
 
 
@@ -57,7 +55,6 @@ class Servicio(models.Model):
     numero_servicio = models.IntegerField(primary_key=True)
     fecha_partida = models.DateField(blank=True, null=True)
     fecha_llegada = models.DateField(blank=True, null=True)
-    calidad_servicio = models.CharField(max_length=45, blank=True, null=True)
     disponibilidad = models.CharField(max_length=45, blank=True, null=True)
     transporte = models.ForeignKey('Transporte', models.DO_NOTHING, db_column='transporte')
     itinerario = models.ForeignKey(Itinerario, models.DO_NOTHING, db_column='itinerario')
@@ -66,13 +63,13 @@ class Servicio(models.Model):
         return str(self.numero_servicio)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'servicio'
 
 
 class Transporte(models.Model):
     codigo = models.CharField(primary_key=True, max_length=45)
-    categoria = models.CharField(max_length=45, blank=True, null=True)
+    calidad = models.CharField(max_length=45, blank=True, null=True)
     tipo = models.CharField(max_length=45, blank=True, null=True)
     disponibilidad = models.CharField(max_length=45, blank=True, null=True)
 
@@ -80,6 +77,6 @@ class Transporte(models.Model):
         return str(self.codigo)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'transporte'
 
