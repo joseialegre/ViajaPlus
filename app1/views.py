@@ -53,18 +53,21 @@ def obtener_servicios_itinerarios(request, itinerario_id):
 
 
 def reservar_pasaje(request):
-    if request.method == 'POST':
-        dni_reserva = request.POST.get('dniReserva')
-        servicio_id = request.POST.get('itinerarios')  # Suponiendo que el valor es el ID del servicio
-        itinerario_codigo = Servicio.objects.get(pk=servicio_id).itinerario
 
-        # Crear el pasaje
-        pasaje = Pasaje.objects.create(
-            costo=100,  # Ajusta el costo según tus requisitos
-            servicio_id=servicio_id,
-            DNI=dni_reserva,
-            estado=0  # Ajusta el estado según tus necesidades
-        )
+    try:
+        if request.method == 'POST':
+            dni_reserva = request.POST.get('dniReserva')
+            servicio_id = request.POST.get('itinerarios')  # Suponiendo que el valor es el ID del servicio
+            itinerario_codigo = Servicio.objects.get(pk=servicio_id).itinerario
 
+            # Crear el pasaje
+            pasaje = Pasaje.objects.create(
+                costo=100,  # Ajusta el costo según tus requisitos
+                servicio_id=servicio_id,
+                DNI=dni_reserva,
+                estado=0  # Ajusta el estado según tus necesidades
+            )
+    except Exception as e:
+        print(e)
         # Realizar otras acciones o redireccionar según sea necesario
-        return JsonResponse({'mensaje': 'Pasaje reservado exitosamente'})
+    return JsonResponse({'mensaje': 'Pasaje reservado exitosamente'})
