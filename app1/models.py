@@ -39,11 +39,11 @@ class Parada(models.Model):
 
 
 class Pasaje(models.Model):
-    idpasaje = models.IntegerField(db_column='idPasaje', primary_key=True)  # Field name made lowercase.
+    idpasaje = models.AutoField(primary_key=True)
     costo = models.IntegerField()
     servicio = models.ForeignKey('Servicio', models.DO_NOTHING, db_column='servicio')
-    DNI = models.IntegerField(db_column='DNI')
-    estado = models.BooleanField(db_column='estado')
+    DNI = models.IntegerField()
+    estado = models.IntegerField(default=0)  # Ajusta el valor predeterminado según tus necesidades
 
     def __str__(self):
         return str(self.idpasaje)
