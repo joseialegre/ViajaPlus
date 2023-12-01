@@ -42,6 +42,8 @@ class Pasaje(models.Model):
     idpasaje = models.IntegerField(db_column='idPasaje', primary_key=True)  # Field name made lowercase.
     costo = models.IntegerField()
     servicio = models.ForeignKey('Servicio', models.DO_NOTHING, db_column='servicio')
+    DNI = models.IntegerField(db_column='DNI')
+    estado = models.BooleanField(db_column='estado')
 
     def __str__(self):
         return str(self.idpasaje)
@@ -51,6 +53,9 @@ class Pasaje(models.Model):
         db_table = 'pasaje'
 
 
+
+
+
 class Servicio(models.Model):
     numero_servicio = models.IntegerField(primary_key=True)
     fecha_partida = models.DateField(blank=True, null=True)
@@ -58,6 +63,7 @@ class Servicio(models.Model):
     disponibilidad = models.CharField(max_length=45, blank=True, null=True)
     transporte = models.ForeignKey('Transporte', models.DO_NOTHING, db_column='transporte')
     itinerario = models.ForeignKey(Itinerario, models.DO_NOTHING, db_column='itinerario')
+    hora_salida = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return str(self.numero_servicio)
