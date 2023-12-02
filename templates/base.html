@@ -19,38 +19,40 @@
         <div class="card container-sm">
             <div class="card-body">
                 <!-- Formulario de Reserva -->
-                <form>
+                <form id="reservar-form">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="dniReserva">DNI Reserva:</label>
-                        <input type="text" class="form-control" id="dniReserva" placeholder="Ingrese DNI de Reserva">
+                        <input type="text" class="form-control" id="dniReserva" name="dniReserva" placeholder="Ingrese DNI de Reserva">
                     </div>
 
                     <div class="form-group">
                         <label for="itinerarios">Itinerarios:</label>
-                        <select class="form-control" id="itinerarios">
-                            <option value="Seleccionar ciudad" disable>Seleccionar ciudad</option>
+                        <select class="form-control" id="itinerarios" name="itinerarios">
+                        <option value="Seleccionar ciudad" disable>Seleccionar ciudad</option>
                             {% for itinerario in itinerarios %}
                                 <option value="{{ itinerario.codigo }}">
-                                    {{ itinerario.nombre }}
-                                </option>
+                            {{ itinerario.nombre }}
+                         </option>
                             {% endfor %}
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="origen">Origen:</label>
-                        <select class="form-control" id="origen">
+                        <select class="form-control" id="origen" name="origen">
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="destino">Destino:</label>
-                        <select class="form-control" id="destino">
+                         <select class="form-control" id="destino" name="destino">
                         </select>
                     </div>
 
-                    <button type="button" id="reservar-btn" class="btn btn-primary">Reservar</button>
-                </form>
+                    <button type="submit" class="btn btn-primary">Reservar</button>
+
+                 </form>
             </div>
         </div>
     </div>
@@ -58,7 +60,7 @@
     <script>
         document.getElementById('itinerarios').addEventListener('change', function () {
             var itinerarioId = this.value;
-    
+
             fetch('/obtener_paradas_intermedias/' + itinerarioId + '/')
                 .then(response => response.json())
                 .then(data => {
@@ -67,11 +69,11 @@
                 })
                 .catch(error => console.error('Error:', error));
         });
-    
+
         function actualizarOpciones(selectId, opciones) {
             var select = document.getElementById(selectId);
             select.innerHTML = '';
-        
+
             opciones.forEach(function (opcion) {
                 var option = document.createElement('option');
                 option.text = opcion.nombre;  // Usa la propiedad 'nombre' en lugar de 'text'
@@ -84,7 +86,7 @@
             var itinerarioId = document.getElementById('itinerarios').value;
             //var origenPosicion = document.getElementById('origen').value;
             //var destinoPosicion = document.getElementById('destino').value;
-    
+
             fetch('/obtener_servicios_itinerarios/' + itinerarioId + '/')
                 .then(response => response.json())
                 .then(data => {
@@ -93,10 +95,33 @@
                     })
                 })
                 .catch(error => console.error('Error:', error));
-        
-            
+
+
         });
     </script>
+
+    <script>
+    document.getElementById('reservar-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    // Obtener datos del formulario
+    var formData = new FormData(this);
+
+    // Envía la solicitud asíncrona con Fetch o Axios si lo deseas
+    fetch('reservar_pasaje', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Puedes manejar la respuesta del servidor aquí
+        console.log(data);
+        alert(data.mensaje);  // Muestra el mensaje de respuesta en una alerta
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>
+
 
 </body>
 </html>
