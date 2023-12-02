@@ -45,6 +45,7 @@
                 <input class="form-control-sm" type="button" value="Sign in"> -->
                 <button type="button" id="reservar-btn" class="btn btn-primary">Reservar</button>   
             </form>
+            
             <script>
                 document.getElementById('reservar-btn').addEventListener('click', function () {
             var itinerarioId = document.getElementById('itinerarios').value;
@@ -70,30 +71,30 @@
                 <form>
                     <div class="form-group">
                         <label for="dniReserva">DNI Reserva:</label>
-                        <input type="text" class="form-control" id="dniReserva" placeholder="Ingrese DNI de Reserva">
+                        <input type="text" class="form-control" id="dniReserva" name="dniReserva" placeholder="Ingrese DNI de Reserva">
                     </div>
 
                     <div class="form-group">
                         <label for="itinerarios">Itinerarios:</label>
-                        <select class="form-control" id="itinerarios">
-                            <option value="Seleccionar ciudad" disable>Seleccionar ciudad</option>
+                        <select class="form-control" id="itinerarios" name="itinerarios">
+                        <option value="Seleccionar ciudad" disable>Seleccionar ciudad</option>
                             {% for itinerario in itinerarios %}
                                 <option value="{{ itinerario.codigo }}">
-                                    {{ itinerario.nombre }}
-                                </option>
+                            {{ itinerario.nombre }}
+                         </option>
                             {% endfor %}
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="origen">Origen:</label>
-                        <select class="form-control" id="origen">
+                        <select class="form-control" id="origen" name="origen">
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="destino">Destino:</label>
-                        <select class="form-control" id="destino">
+                         <select class="form-control" id="destino" name="destino">
                         </select>
                     </div>
 
