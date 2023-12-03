@@ -49,9 +49,9 @@
                     <button type="submit" class="btn btn-primary">Continuar</button>
 
                  </form>
-                <form action="{% url 'servicios' %}" method="get" >
-                    <button onclick="llamarMostrarServicios()">Mostrar servicios</button>
-                </form>
+
+                <button onclick="llamarMostrarServicios()">Mostrar servicios</button>
+
             </div>
         </div>
     </div>
@@ -151,9 +151,10 @@
   function llamarMostrarServicios() {
     var select = document.getElementById("itinerarios");
     var codigo = select.options[select.selectedIndex].value;
-    window.location.href = "/mostrar_servicios_itinerarios/" + codigo + "/";
+    window.location.href = "{% url 'mostrar_servicios_itinerarios' 0 %}".replace('0', codigo);
   }
 </script>
+
 
 
 

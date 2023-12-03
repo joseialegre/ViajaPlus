@@ -8,6 +8,6 @@ urlpatterns = [
     path('obtener_servicios_itinerarios/<int:itinerario_id>/', obtener_servicios_itinerarios, name='obtener_servicios_itinerarios'),
     path('reservar_pasaje', reservar_pasaje, name='reservar_pasaje'),
     path('servicios/', mostrar_servicios_itinerarios, name='servicios'),
-    path('mostrar_servicios_itinerarios/', mostrar_servicios_itinerarios, name='mostrar_servicios_itinerarios'),
+    path('mostrar_servicios_itinerarios/<int:itinerario_id>/', mostrar_servicios_itinerarios, name='mostrar_servicios_itinerarios'),
 
 ]
