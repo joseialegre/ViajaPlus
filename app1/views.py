@@ -40,8 +40,8 @@ def obtener_servicios_itinerarios(request, itinerario_id):
         ''', [itinerario_id])
 
         servicios = cursor.fetchall()
-    
-    servicios = [{'numero_servicio': numero_servicio, 
+
+    servicios = [{'numero_servicio': numero_servicio,
                 'fecha_partida': fecha_partida,
                 'fecha_llegada': fecha_llegada,
                 'transporte': transporte,
@@ -49,7 +49,7 @@ def obtener_servicios_itinerarios(request, itinerario_id):
                 }
                for numero_servicio, fecha_partida, fecha_llegada, transporte, itinerario in servicios]
 
-    return JsonResponse({'servicios': servicios})
+    return {'servicios': servicios}
 
 
 def reservar_pasaje(request):
@@ -76,5 +76,5 @@ def servicios(request):
     return render(request, 'servicios.html')
 
 def mostrar_servicios_itinerarios(request, itinerario_id):
-    servicios = obtener_servicios_itinerarios(request, itinerario_id).json()['servicios']
+    servicios = obtener_servicios_itinerarios(request, itinerario_id)['servicios']
     return render(request, 'servicios.html', {'servicios': servicios})
