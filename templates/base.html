@@ -15,8 +15,8 @@
         <div class="card container-sm">
             <div class="card-body">
                 <!-- Formulario de Reserva -->
-                <form id="reservar-form">
-                    {% csrf_token %}
+                <form  action="{% url 'servicios' %}" method="get">
+                    <!--% csrf_token %-->
                     <div class="form-group">
                         <label for="dniReserva">DNI Reserva:</label>
                         <input type="text" class="form-control" id="dniReserva" name="dniReserva" placeholder="Ingrese DNI de Reserva">
@@ -28,8 +28,8 @@
                         <option value="Seleccionar ciudad" disable>Seleccionar ciudad</option>
                             {% for itinerario in itinerarios %}
                                 <option value="{{ itinerario.codigo }}">
-                            {{ itinerario.nombre }}
-                         </option>
+                                    {{ itinerario.nombre }}
+                                </option>
                             {% endfor %}
                         </select>
                     </div>
@@ -46,9 +46,12 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Reservar</button>
+                    <button type="submit" class="btn btn-primary">Continuar</button>
 
                  </form>
+                <form action="{% url 'servicios' %}" method="get" >
+                    <button onclick="llamarMostrarServicios()">Mostrar servicios</button>
+                </form>
             </div>
         </div>
     </div>
@@ -117,6 +120,41 @@
     .catch(error => console.error('Error:', error));
 });
 </script>
+<script>
+    $(document).ready(function () {
+        // Manejar el clic en el botón "Ir a Servicios"
+        $("#formIrAServicios").submit(function (event) {
+            // Evitar el envío del formulario por defecto
+            event.preventDefault();
+
+            // Obtener el valor de itinerario_id del elemento select
+            var itinerario_id = $("#itinerarios").val();
+
+            // Realizar la solicitud AJAX
+            $.ajax({
+                url: "{% url 'obtener_servicios_itinerarios' itinerario_id=0 %}".replace('0', itinerario_id),
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    // Manipular los datos recibidos, por ejemplo, redirigir a la página de servicios.html
+                    window.location.href = "{% url 'servicios' %}"; // Reemplaza 'servicios_html' con la URL correcta para servicios.html
+                },
+                error: function (error) {
+                    console.log("Error al obtener servicios:", error);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+  function llamarMostrarServicios() {
+    var select = document.getElementById("itinerarios");
+    var codigo = select.options[select.selectedIndex].value;
+    window.location.href = "/mostrar_servicios_itinerarios/" + codigo + "/";
+  }
+</script>
+
 
 
 </body>

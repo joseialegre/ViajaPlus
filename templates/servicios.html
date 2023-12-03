@@ -1,0 +1,30 @@
+<!-- servicios.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Servicios</title>
+</head>
+<body>
+    <h1>Servicios</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Número de servicio</th>
+                <th>Fecha de partida</th>
+                <th>Fecha de llegada</th>
+                <th>Transporte</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for servicio in servicios %}
+            <tr>
+                <td>{{ servicio.numero_servicio }}</td>
+                <td>{{ servicio.fecha_partida }}</td>
+                <td>{{ servicio.fecha_llegada }}</td>
+                <td>{{ servicio.transporte }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -71,3 +71,10 @@ def reservar_pasaje(request):
         print(e)
         # Realizar otras acciones o redireccionar según sea necesario
     return JsonResponse({'mensaje': 'Pasaje reservado exitosamente'})
+
+def servicios(request):
+    return render(request, 'servicios.html')
+
+def mostrar_servicios_itinerarios(request, itinerario_id):
+    servicios = obtener_servicios_itinerarios(request, itinerario_id).json()['servicios']
+    return render(request, 'servicios.html', {'servicios': servicios})
