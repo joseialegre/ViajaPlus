@@ -9,119 +9,48 @@
     
     <!-- Bootstrap 5 CSS bundle -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <!-- Estilos propios -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/formularioDinamico.js' %}"></script>
 </head>
-<body id="bodyStyle">
-    <div class="container mt-5">
-        <h1 class="text-center display-4">Viaja Plus</h1>
+<body>
 
-        <div class="card container-sm">
-            <div class="card-body">
-                <!-- Formulario de Reserva -->
-                <form id="reservar-form">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="dniReserva">DNI Reserva:</label>
-                        <input type="text" class="form-control" id="dniReserva" name="dniReserva" placeholder="Ingrese DNI de Reserva">
-                    </div>
+    <div id="containerBody" class="rounded-3">
+        
+        <div id="containerItinerarios" class="rounded-4 p-3">
+            
+            <h4 class="text-center fw-bold">VIAJA-PLUS</h1>
+            
+            <form id="formReservas" class="d-flex flex-column align-content-center" action="">
 
-                    <div class="form-group">
-                        <label for="itinerarios">Itinerarios:</label>
-                        <select class="form-control" id="itinerarios" name="itinerarios">
-                        <option value="Seleccionar ciudad" disable>Seleccionar ciudad</option>
-                            {% for itinerario in itinerarios %}
-                                <option value="{{ itinerario.codigo }}">
+                <input class="form-control-sm mb-2" type="text" placeholder="DNI del pasajero">
+                
+                <select class="form-control-sm" id="itinerarios">
+                    <option disable>Seleccione un itinerario</option>
+                    {% for itinerario in itinerarios %}
+                        <option value="{{ itinerario.codigo }}">
                             {{ itinerario.nombre }}
-                         </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="origen">Origen:</label>
-                        <select class="form-control" id="origen" name="origen">
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="destino">Destino:</label>
-                         <select class="form-control" id="destino" name="destino">
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Reservar</button>
-
-                 </form>
-            </div>
+                        </option>
+                    {% endfor %}
+                </select>
+                <div class="row my-2">
+                    <div class="col" id="origen-container"></div>
+    
+                    <div class="col" id="destino-container"></div>
+                </div>
+                <!-- <input class="form-control-sm" type="password" placeholder="Password">
+                <input class="form-control-sm" type="button" value="Sign in"> -->
+                <!-- <button type="button" id="reservar-btn" class="btn btn-primary">Reservar</button>  -->
+            </form>
+            
         </div>
+
+        <div id="containerItinerarios" class="rounded-4 p-3">
+
+        </div>
+
     </div>
-
-    <script>
-        document.getElementById('itinerarios').addEventListener('change', function () {
-            var itinerarioId = this.value;
-
-            fetch('/obtener_paradas_intermedias/' + itinerarioId + '/')
-                .then(response => response.json())
-                .then(data => {
-                    actualizarOpciones('origen', data.paradas_intermedias);
-                    actualizarOpciones('destino', data.paradas_intermedias);
-                })
-                .catch(error => console.error('Error:', error));
-        });
-
-        function actualizarOpciones(selectId, opciones) {
-            var select = document.getElementById(selectId);
-            select.innerHTML = '';
-
-            opciones.forEach(function (opcion) {
-                var option = document.createElement('option');
-                option.text = opcion.nombre;  // Usa la propiedad 'nombre' en lugar de 'text'
-                option.value = opcion.posicion;  // Usa la propiedad 'posicion' en lugar de 'value'
-                select.add(option);
-            });
-        }
-
-        document.getElementById('reservar-btn').addEventListener('click', function () {
-            var itinerarioId = document.getElementById('itinerarios').value;
-            //var origenPosicion = document.getElementById('origen').value;
-            //var destinoPosicion = document.getElementById('destino').value;
-
-            fetch('/obtener_servicios_itinerarios/' + itinerarioId + '/')
-                .then(response => response.json())
-                .then(data => {
-                    data.servicios.forEach(function (servicio){
-                        alert('Servicio: ' + servicio.numero_servicio + ', Partida: ' + servicio.fecha_partida + ', Llegada: ' + servicio.fecha_llegada);
-                    })
-                })
-                .catch(error => console.error('Error:', error));
-
-
-        });
-    </script>
-
-    <script>
-    document.getElementById('reservar-form').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    // Obtener datos del formulario
-    var formData = new FormData(this);
-
-    // Envía la solicitud asíncrona con Fetch o Axios si lo deseas
-    fetch('reservar_pasaje', {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Puedes manejar la respuesta del servidor aquí
-        console.log(data);
-        alert(data.mensaje);  // Muestra el mensaje de respuesta en una alerta
-    })
-    .catch(error => console.error('Error:', error));
-});
-</script>
-
 
 </body>
 </html>

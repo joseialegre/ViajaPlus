@@ -1,5 +1,121 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
-* {
+body {
     font-family: 'Roboto Slab', sans-serif !important;
+    background-image: url("../media/paisaje-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#containerBody {
+    min-width: 80vw;
+    min-height: 80vh;
+    max-width: fit-content;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    background: rgba(106,135,155,0.3);
+    backdrop-filter: blur(4px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#containerItinerarios {
+    width: 50%;
+    height: 80%;
+
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items:normal;
+
+    
+    background: rgba( 255, 255, 255, 0.2 );
+    box-shadow: 0 8px 32px 0 rgba(19, 20, 27, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+#containerOD p {
+    margin: 0;
+    font-size: 1em;
+}
+
+#origen-container {
+    border-right: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+form input, form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+    box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1em;
+}
+
+form label {
+    margin: 0;
+    font-size: 1em;
+}
+
+form input[type="radio"] {
+    accent-color: black;
+    margin: 0 3px 0 0;
+    padding: 0;
+    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+
+form input:hover {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+form input[type="text"]:focus, form input[type="radio"]:focus{
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+form button {
+    font-size: 1rem;
+}
+form button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+/* form:hover {
+    margin: 4px;
+} */
+label {
+    display: inline-block;
+    white-space: normal;
+}
+
+::placeholder {
+    font-weight: 400;   
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+
+a,
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
 }
