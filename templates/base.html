@@ -22,31 +22,29 @@
             
             <h4 class="text-center fw-bold">Viaja Plus</h1>
             
-            <form class="d-flex flex-column align-content-center" action="">
+            <form id="formReservas" class="d-flex flex-column align-content-center" action="">
 
-                <input class="form-control-sm mb-1" type="text" placeholder="DNI del pasajero">
-
-                <label class="text-center fw-bold" for="itinerarios">Elige un Itinerario:</label>
+                <input class="form-control-sm mb-2" type="text" placeholder="DNI del pasajero">
                 
-                <select class="form-control-sm mb-1" id="itinerarios">
-                    <option value="Seleccionar ciudad" disable>Seleccionar ciudad</option>
+                <select class="form-control-sm" id="itinerarios">
+                    <option disable>Seleccione un itinerario</option>
                     {% for itinerario in itinerarios %}
                         <option value="{{ itinerario.codigo }}">
                             {{ itinerario.nombre }}
                         </option>
                     {% endfor %}
                 </select>
-                <div class="row">
+                <div class="row my-2">
                     <div class="col" id="origen-container"></div>
     
                     <div class="col" id="destino-container"></div>
                 </div>
                 <!-- <input class="form-control-sm" type="password" placeholder="Password">
                 <input class="form-control-sm" type="button" value="Sign in"> -->
-                <button type="button" id="reservar-btn" class="btn btn-primary">Reservar</button>   
+                <!-- <button type="button" id="reservar-btn" class="btn btn-primary">Reservar</button>  -->
             </form>
             
-            <script>
+            <!-- <script>
                 document.getElementById('reservar-btn').addEventListener('click', function () {
             var itinerarioId = document.getElementById('itinerarios').value;
             //var origenPosicion = document.getElementById('origen').value;
@@ -61,48 +59,9 @@
                 })
                 .catch(error => console.error('Error:', error));
                 });
-            </script>
+            </script> -->
             
         </div>
-
-        <!-- <div class="card container-sm">
-            <div class="card-body">
-                Formulario de Reserva
-                <form>
-                    <div class="form-group">
-                        <label for="dniReserva">DNI Reserva:</label>
-                        <input type="text" class="form-control" id="dniReserva" name="dniReserva" placeholder="Ingrese DNI de Reserva">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="itinerarios">Itinerarios:</label>
-                        <select class="form-control" id="itinerarios" name="itinerarios">
-                        <option value="Seleccionar ciudad" disable>Seleccionar ciudad</option>
-                            {% for itinerario in itinerarios %}
-                                <option value="{{ itinerario.codigo }}">
-                            {{ itinerario.nombre }}
-                         </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="origen">Origen:</label>
-                        <select class="form-control" id="origen" name="origen">
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="destino">Destino:</label>
-                         <select class="form-control" id="destino" name="destino">
-                        </select>
-                    </div>
-
-                    <button type="button" id="reservar-btn" class="btn btn-primary">Reservar</button>
-                    
-                </form>
-            </div>
-        </div> -->
     </div>
 
 </body>

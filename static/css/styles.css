@@ -1,12 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
 body {
-    font-family: 'Roboto Slab', sans-serif !important;    
+    font-family: 'Roboto Slab', sans-serif !important;
+    background-image: url("../media/paisaje-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #containerBody {
-    width: 80vw;
-    height: 80vh;
+    min-width: 80vw;
+    min-height: 80vh;
+    max-width: fit-content;
 
     position: absolute;
     left: 50%;
@@ -14,7 +18,8 @@ body {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 
-    background: linear-gradient(to right, rgba(18,31,89,0.6), rgba(74,103,161,0.6));
+    background: rgba(106,135,155,0.3);
+    backdrop-filter: blur(4px);
 
     display: flex;
     flex-direction: column;
@@ -33,8 +38,8 @@ body {
 
     
     background: rgba( 255, 255, 255, 0.2 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 4px );
+    box-shadow: 0 8px 32px 0 rgba(19, 20, 27, 0.37);
+    backdrop-filter: blur( 5px );
     -webkit-backdrop-filter: blur( 4px );
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
@@ -49,7 +54,7 @@ body {
     border-right: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
-form input {
+form input, form button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,33 +75,27 @@ form label {
     font-size: 1em;
 }
 
-form input[type="checkbox"] {
+form input[type="radio"] {
+    accent-color: black;
     margin: 0 3px 0 0;
     padding: 0;
-}
-form input[type="checkbox"] {
-    background: rgba(255, 255, 255, 0.1);
     box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
 }
 
 form input:hover {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+form input[type="text"]:focus, form input[type="radio"]:focus{
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
 }
-form input[type="email"]:focus, form input[type="password"]:focus {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
-}
-form input[type="button"] {
-    margin-top: 10px;
-    width: 150px;
+form button {
     font-size: 1rem;
 }
-form input[type="button"]:hover {
-    cursor: pointer;
-}
-form input[type="button"]:active {
-    background: rgba(255, 255, 255, 0.2);
+form button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
 }
 /* form:hover {
     margin: 4px;
