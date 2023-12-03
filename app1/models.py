@@ -42,8 +42,8 @@ class Pasaje(models.Model):
     idpasaje = models.AutoField(primary_key=True)
     costo = models.IntegerField()
     servicio = models.ForeignKey('Servicio', models.DO_NOTHING, db_column='servicio')
-    DNI = models.IntegerField()
-    estado = models.IntegerField(default=0)  # Ajusta el valor predeterminado según tus necesidades
+    DNI = models.IntegerField(default='123',null=False)
+    estado = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.idpasaje)
@@ -51,9 +51,6 @@ class Pasaje(models.Model):
     class Meta:
         managed = True
         db_table = 'pasaje'
-
-
-
 
 
 class Servicio(models.Model):
@@ -64,6 +61,7 @@ class Servicio(models.Model):
     transporte = models.ForeignKey('Transporte', models.DO_NOTHING, db_column='transporte')
     itinerario = models.ForeignKey(Itinerario, models.DO_NOTHING, db_column='itinerario')
     hora_salida = models.DateField(blank=True, null=True)
+    hora_llegada = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return str(self.numero_servicio)
@@ -85,4 +83,3 @@ class Transporte(models.Model):
     class Meta:
         managed = True
         db_table = 'transporte'
-
