@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Tu código JavaScript aquí
     var origenes = document.getElementById('origen-container');
     var destinos = document.getElementById('destino-container');
-    var form = document.getElementById('formReservas'); // Asegúrate de reemplazar 'formReservas' con el ID de tu formulario
+    var form = document.getElementById('formReservas');
+    var botonAgregado = false;
 
-    // Agregar evento change al select de itinerarios para traer las paradas intermedias de ese itinerario
     document.getElementById('itinerarios').addEventListener('change', function () {
         var itinerarioId = this.value;
 
@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Deshabilitar todos los destinos al inicio
                 deshabilitarDestinos();
+                botonAgregado = false; // Reiniciar la bandera cuando cambia el itinerario
             })
             .catch(error => console.error('Error:', error));
     });
 
-    // Lógica añadida a los radiobuttons
     function deshabilitarDestinos() {
         var radiosDestino = destinos.querySelectorAll('input[type="radio"]');
         radiosDestino.forEach(function (radio) {
@@ -87,19 +87,19 @@ document.addEventListener('DOMContentLoaded', function () {
         var radioOrigenSeleccionado = origenes.querySelector('input[type="radio"]:checked');
         var radioDestinoSeleccionado = destinos.querySelector('input[type="radio"]:checked');
 
-        // Verificar si ambos radios de origen y destino están seleccionados
-        if (radioOrigenSeleccionado && radioDestinoSeleccionado) {
+        // Verificar si ambos radios de origen y destino están seleccionados y si el botón no ha sido agregado previamente
+        if (radioOrigenSeleccionado && radioDestinoSeleccionado && !botonAgregado) {
             agregarBoton(); // Agregar el botón al formulario
+            botonAgregado = true; // Marcar que el botón ha sido agregado
         }
     }
 
-    // Añadir botón al formulario cuando se selecciona un origen y un destino
     function agregarBoton() {
         var boton = document.createElement('button');
+        boton.id = 'botonEnviar';
         boton.type = 'button';
-        boton.textContent = 'Enviar';
+        boton.textContent = 'Ver Servicios';
         boton.addEventListener('click', function () {
-            // Lógica para el botón (puedes agregar la funcionalidad que desees)
             alert('Botón presionado');
         });
 

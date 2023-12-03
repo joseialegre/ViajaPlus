@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.db import connection
@@ -40,8 +40,8 @@ def obtener_servicios_itinerarios(request, itinerario_id):
         ''', [itinerario_id])
 
         servicios = cursor.fetchall()
-    
-    servicios = [{'numero_servicio': numero_servicio, 
+
+    servicios = [{'numero_servicio': numero_servicio,
                 'fecha_partida': fecha_partida,
                 'fecha_llegada': fecha_llegada,
                 'transporte': transporte,
@@ -49,8 +49,7 @@ def obtener_servicios_itinerarios(request, itinerario_id):
                 }
                for numero_servicio, fecha_partida, fecha_llegada, transporte, itinerario in servicios]
 
-    return JsonResponse({'servicios': servicios})
-
+    return {'servicios': servicios}
 
 def reservar_pasaje(request):
 
