@@ -16,7 +16,7 @@ class Itinerario(models.Model):
     nombre = models.CharField(max_length=100)
 
     def __str__(self):
-        return str(self.codigo)
+        return str(self.codigo) + str(self.nombre)
 
     class Meta:
         managed = True
@@ -25,14 +25,14 @@ class Itinerario(models.Model):
 
 class Parada(models.Model):
     itinerario = models.ForeignKey(Itinerario, models.DO_NOTHING, db_column='itinerario_codigo')
-    ciudad_nombre = models.ForeignKey(Ciudad, models.DO_NOTHING, db_column='ciudad_nombre')
+    ciudad_nombre = models.ForeignKey(Ciudad, models.DO_NOTHING, db_column='ciudad_nombre', primary_key=True)
     posicion = models.IntegerField(null=False)
 
     def __str__(self):
         return str(self.ciudad_nombre)
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'parada'
         unique_together = (('itinerario', 'ciudad_nombre'),)
         auto_created = True
