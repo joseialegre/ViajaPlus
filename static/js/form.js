@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var destinos = document.getElementById('destino-container');
     var form = document.getElementById('formReservas'); // Asegúrate de reemplazar 'formReservas' con el ID de tu formulario
 
+    // Agregar evento change al select de itinerarios para traer las paradas intermedias de ese itinerario
     document.getElementById('itinerarios').addEventListener('change', function () {
         var itinerarioId = this.value;
 
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error:', error));
     });
 
+    // Lógica añadida a los radiobuttons
     function deshabilitarDestinos() {
         var radiosDestino = destinos.querySelectorAll('input[type="radio"]');
         radiosDestino.forEach(function (radio) {
@@ -91,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Añadir botón al formulario cuando se selecciona un origen y un destino
     function agregarBoton() {
         var boton = document.createElement('button');
         boton.type = 'button';
