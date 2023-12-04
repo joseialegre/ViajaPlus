@@ -34,8 +34,8 @@ def obtener_servicios_itinerarios(request, itinerario_id):
         cursor.execute('''
             SELECT numero_servicio, partida, llegada, transporte, itinerario, disponibilidad FROM servicio
             WHERE itinerario = %s
-            AND fecha_partida >= CURDATE()
-            ORDER BY fecha_partida ASC
+            AND partida >= CURDATE()
+            ORDER BY partida ASC
         ''', [itinerario_id])
 
         servicios = cursor.fetchall()
@@ -48,7 +48,7 @@ def obtener_servicios_itinerarios(request, itinerario_id):
                 'itinerario': itinerario,}
                for numero_servicio, llegada, partida, transporte, itinerario, disponibilidad in servicios]
 
-    return {'servicios': servicios}
+    return JsonResponse({'servicios': servicios})
 
 def obtener_reservas(request, dni):
     with connection.cursor() as cursor:
