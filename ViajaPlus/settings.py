@@ -17,7 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [STATIC_DIR,]
+STATICFILES_DIRS = [STATIC_DIR, '/var/www/static']
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +27,7 @@ STATICFILES_DIRS = [STATIC_DIR,]
 SECRET_KEY = 'django-insecure-7sf_zqwl*mhlkf-&&v3df1nc@&*ti6yrn79@89si!^i1vez--^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
