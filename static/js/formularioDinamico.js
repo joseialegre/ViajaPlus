@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Tu código JavaScript aquí
     var origenes = document.getElementById('origen-container');
     var destinos = document.getElementById('destino-container');
-    var form = document.getElementById('formReservas');
+    var form = document.getElementById('first-form');
     var botonAgregado = false;
 
     document.getElementById('itinerarios').addEventListener('change', function () {
@@ -96,13 +96,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function agregarBoton() {
         var boton = document.createElement('button');
-        boton.id = 'botonEnviar';
+        boton.id = 'ver-servicios';
         boton.type = 'button';
         boton.textContent = 'Ver Servicios';
-        boton.addEventListener('click', function () {
-            alert('Botón presionado');
-        });
-
         form.appendChild(boton);
     }
 });
