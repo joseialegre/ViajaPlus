@@ -1,6 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
 from django.db import connection
 
 from .models import *
@@ -33,7 +32,7 @@ def obtener_paradas_intermedias(request, itinerario_id):
 def obtener_servicios_itinerarios(request, itinerario_id):
     with connection.cursor() as cursor:
         cursor.execute('''
-            SELECT numero_servicio, fecha_partida, fecha_llegada, transporte, itinerario FROM servicio
+            SELECT numero_servicio, partida, llegada, transporte, itinerario, disponibilidad FROM servicio
             WHERE itinerario = %s
             AND fecha_partida >= CURDATE()
             ORDER BY fecha_partida ASC
@@ -42,18 +41,58 @@ def obtener_servicios_itinerarios(request, itinerario_id):
         servicios = cursor.fetchall()
 
     servicios = [{'numero_servicio': numero_servicio,
-                'fecha_partida': fecha_partida,
-                'fecha_llegada': fecha_llegada,
+                'partida': partida,
+                'llegada': llegada,
                 'transporte': transporte,
-                'itinerario': itinerario,
-                }
-               for numero_servicio, fecha_partida, fecha_llegada, transporte, itinerario in servicios]
+                'disponibilidad': disponibilidad,
+                'itinerario': itinerario,}
+               for numero_servicio, llegada, partida, transporte, itinerario, disponibilidad in servicios]
 
     return {'servicios': servicios}
 
+def obtener_reservas(request, dni):
+    with connection.cursor() as cursor:
+        cursor.execute('''
+            SELECT idPasaje, costo, servicio, DNI, pagado, origen, destino
+            FROM pasaje
+            WHERE DNI = %s
+        ''', [dni])
+
+        reservas = cursor.fetchall()
+        
+    reservas = [{'idPasaje': idPasaje, 
+                 'costo': costo,
+                 'servicio': servicio,
+                 'DNI': DNI,
+                 'pagado': pagado,
+                 'origen': origen,
+                 'destino': destino,
+                 } 
+                for idPasaje, costo, servicio, DNI, pagado, origen, destino in reservas]
+    
+    return {'reservas': reservas}
+
+def consultar_disponibilidad(servicio_id):
+    with connection.cursor() as cursor:
+        cursor.execute('''
+            SELECT idPasaje, costo, servicio, DNI, pagado, origen, destino
+            FROM pasaje
+            WHERE DNI = %s
+        ''', [servicio_id])
 
 def crear_pasaje(request):
-    print(request.POST)
+    servicio_id = request.POST['servicio']
+    servicio_request = get_object_or_404(Servicio, numero_servicio=servicio_id)
+
+    pasaje = Pasaje(
+        servicio=servicio_request,
+        DNI=request.POST['DNI'],
+        origen=request.POST['origen'],
+        destino=request.POST['destino'],
+        costo = 200
+    )
+
+    pasaje.save()
     return redirect('home')
 
 def prueba(request):

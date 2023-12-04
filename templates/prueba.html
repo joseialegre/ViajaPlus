@@ -9,8 +9,11 @@
     <form method="post" action="crear_pasaje/">
         {% csrf_token %}
     
-        <label for="id_costo">Costo:</label>
-        <input type="number" id="id_costo" name="costo" required>
+        <label for="origen">origen:</label>
+        <input type="text" id="origen" name="origen" required>
+        
+        <label for="destino">destino:</label>
+        <input type="text" id="destino" name="destino" required>
     
         <label for="id_servicio">Servicio:</label>
         <select id="id_servicio" name="servicio" required>
