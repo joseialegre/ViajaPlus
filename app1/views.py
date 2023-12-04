@@ -32,7 +32,9 @@ def obtener_paradas_intermedias(request, itinerario_id):
 def obtener_servicios_itinerarios(request, itinerario_id):
     with connection.cursor() as cursor:
         cursor.execute('''
-            SELECT numero_servicio, partida, llegada, transporte, itinerario, disponibilidad FROM servicio
+            SELECT numero_servicio, partida, llegada, disponibilidad, calidad, tipo
+            FROM servicio AS s
+            INNER JOIN transporte AS t ON s.transporte = t.codigo
             WHERE itinerario = %s
             AND partida >= CURDATE()
             ORDER BY partida ASC
@@ -43,34 +45,13 @@ def obtener_servicios_itinerarios(request, itinerario_id):
     servicios = [{'numero_servicio': numero_servicio,
                 'partida': partida,
                 'llegada': llegada,
-                'transporte': transporte,
                 'disponibilidad': disponibilidad,
-                'itinerario': itinerario,}
-               for numero_servicio, llegada, partida, transporte, itinerario, disponibilidad in servicios]
+                'calidad': calidad,
+                'tipo': tipo,}
+               for numero_servicio, partida, llegada, disponibilidad, calidad, tipo in servicios]
 
+    print(servicios)
     return JsonResponse({'servicios': servicios})
-
-def obtener_reservas(request, dni):
-    with connection.cursor() as cursor:
-        cursor.execute('''
-            SELECT idPasaje, costo, servicio, DNI, pagado, origen, destino
-            FROM pasaje
-            WHERE DNI = %s
-        ''', [dni])
-
-        reservas = cursor.fetchall()
-        
-    reservas = [{'idPasaje': idPasaje, 
-                 'costo': costo,
-                 'servicio': servicio,
-                 'DNI': DNI,
-                 'pagado': pagado,
-                 'origen': origen,
-                 'destino': destino,
-                 } 
-                for idPasaje, costo, servicio, DNI, pagado, origen, destino in reservas]
-    
-    return JsonResponse({'reservas': reservas})
 
 def consultar_disponibilidad(servicio_id):
     servicio = Servicio.objects.get(numero_servicio=servicio_id)
@@ -82,8 +63,6 @@ def consultar_disponibilidad(servicio_id):
         return True
     else:
         return False
-
-
 
 def crear_pasaje(request):
     servicio_id = request.POST['servicio']
@@ -108,5 +87,40 @@ def crear_pasaje(request):
 def prueba(request):
     return render(request, 'prueba.html')
 
-def reservas(request):
-    return render(request, 'pasajes.html')
+def pasajes(request, dni):
+    consulta_sql = '''
+        SELECT idPasaje, pagado, origen, destino, partida, llegada, calidad, tipo
+        FROM pasaje AS p
+        INNER JOIN servicio AS s ON p.servicio = s.numero_servicio
+        INNER JOIN transporte AS t ON s.transporte = t.codigo
+        WHERE p.DNI = %s
+    '''
+
+    with connection.cursor() as cursor:
+        cursor.execute(consulta_sql, [dni])
+        pasajes_resultados = cursor.fetchall()
+
+    reservas = [
+        {
+            'idPasaje': idPasaje,
+            'pagado': pagado,
+            'origen': origen,
+            'destino': destino,
+            'llegada': llegada,
+            'partida': partida,
+            'calidad': calidad,
+            'tipo': tipo,
+        }
+        for idPasaje, pagado, origen, destino, llegada, partida, calidad, tipo in pasajes_resultados
+    ]
+
+    context = {'pasajes': reservas}
+    return render(request, 'pasajes.html', context)
+
+def pagar_pasaje(request, pasaje_id):
+    pasaje = get_object_or_404(Pasaje, idpasaje=pasaje_id)
+
+    pasaje.pagado = 1
+    pasaje.save()
+
+    return redirect('pasajes', pasaje.DNI)
