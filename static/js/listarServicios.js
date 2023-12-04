@@ -56,7 +56,7 @@ function createServiceCards(servicios) {
         var input = document.createElement('input');
         input.type = 'radio';
         input.name = 'radio-servicio';
-        input.value = servicio.numero_servicio;
+        input.value = servicio.calidad;
 
         label.appendChild(input);
 
@@ -64,9 +64,15 @@ function createServiceCards(servicios) {
         servicioInfo.classList.add('flex-fill')
         
         var title = document.createElement('h5');
-        title.textContent = "Servicio " + servicio.transporte;
+        title.textContent = "Servicio " + servicio.calidad;
         title.classList.add('fw-bold', 'text-end', 'm-0')
         servicioInfo.appendChild(title);
+
+        var description0 = document.createElement('p');
+        description0.textContent = "Servicio " + servicio.tipo;
+        description0.classList.add('fw-bold', 'text-end', 'm-0')
+        description0.style = 'font-size: 0.8rem';
+        servicioInfo.appendChild(description0);
 
         var description1 = document.createElement('p');
         description1.classList.add('text-end', 'text-wrap', 'm-0');
