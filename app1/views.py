@@ -50,7 +50,6 @@ def obtener_servicios_itinerarios(request, itinerario_id):
                 'tipo': tipo,}
                for numero_servicio, partida, llegada, disponibilidad, calidad, tipo in servicios]
 
-    print(servicios)
     return JsonResponse({'servicios': servicios})
 
 def consultar_disponibilidad(servicio_id):
@@ -122,5 +121,12 @@ def pagar_pasaje(request, pasaje_id):
 
     pasaje.pagado = 1
     pasaje.save()
+
+    return redirect('pasajes', pasaje.DNI)
+
+def cancelar_reserva(request, pasaje_id):
+    pasaje = get_object_or_404(Pasaje, idpasaje=pasaje_id)
+
+    pasaje.delete()
 
     return redirect('pasajes', pasaje.DNI)
