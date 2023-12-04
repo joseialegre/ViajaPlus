@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script src="{% static 'js/formularioDinamico.js' %}"></script>
     <script src="{% static 'js/listarServicios.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -29,7 +30,7 @@
 
                     <input class="form-control-sm mb-2" type="text" placeholder="DNI del pasajero">
                     
-                    <select class="form-control-sm" id="itinerarios">
+                    <select class="form-control-sm" id="itinerarios" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                         <option disable>Seleccione un itinerario</option>
                         {% for itinerario in itinerarios %}
                             <option value="{{ itinerario.codigo }}">
