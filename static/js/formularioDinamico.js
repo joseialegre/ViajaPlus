@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var radio = document.createElement('input')
             radio.type = 'radio';
             radio.name = selectId;
-            radio.value = opcion.posicion;
+            radio.value = opcion.nombre;
 
             // Deshabilitar la última ciudad en origen y la primera ciudad en destino
             if ((selectId === 'origen' && index === opciones.length - 1) ||

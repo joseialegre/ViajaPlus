@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(event) {
     var formReservas = document.getElementById('formReservas');
-
+    
     formReservas.addEventListener('click', function (event) {
         var target = event.target;
 
