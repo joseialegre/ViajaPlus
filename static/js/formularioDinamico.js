@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
         opciones.forEach(function (opcion, index) {
             var radioContainer = document.createElement('div'); // Contenedor para radiobutton y label
 
-            var radio = document.createElement('input');
+            var radio = document.createElement('input')
             radio.type = 'radio';
-            radio.name = selectId + '-radio';
+            radio.name = selectId;
             radio.value = opcion.posicion;
 
             // Deshabilitar la última ciudad en origen y la primera ciudad en destino
@@ -53,9 +53,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             var label = document.createElement('label');
             label.appendChild(document.createTextNode(opcion.nombre));
+            label.classList.add('paradasLabel');
+
+            if (radio.disabled) {
+                label.style.textDecoration = 'line-through'; // Puedes cambiar 'line-through' por 'underline' si prefieres subrayado
+            }
 
             radioContainer.appendChild(label);
             radioContainer.appendChild(radio);
+
             radioContainer.classList.add('d-flex', 'align-items-center', 'justify-content-between');
             container.appendChild(radioContainer);
 

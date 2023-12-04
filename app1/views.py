@@ -40,7 +40,7 @@ def obtener_servicios_itinerarios(request, itinerario_id):
             ORDER BY partida ASC
         ''', [itinerario_id])
 
-        servicios = cursor.fetchall()
+        serviciosFetch = cursor.fetchall()
 
     servicios = [{'numero_servicio': numero_servicio,
                 'partida': partida,
@@ -48,7 +48,7 @@ def obtener_servicios_itinerarios(request, itinerario_id):
                 'disponibilidad': disponibilidad,
                 'calidad': calidad,
                 'tipo': tipo,}
-               for numero_servicio, partida, llegada, disponibilidad, calidad, tipo in servicios]
+               for numero_servicio, partida, llegada, disponibilidad, calidad, tipo in serviciosFetch]
 
     return JsonResponse({'servicios': servicios})
 

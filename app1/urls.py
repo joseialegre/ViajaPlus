@@ -9,7 +9,8 @@ urlpatterns = [
     path('obtener_paradas_intermedias/<int:itinerario_id>/', obtener_paradas_intermedias),
     path('obtener_servicios_itinerarios/<int:itinerario_id>/', obtener_servicios_itinerarios),
     path('pagar_pasaje/<int:pasaje_id>/', pagar_pasaje, name='pagar_pasaje'),
+
     path('cancelar_reserva/<int:pasaje_id>/', cancelar_reserva, name='cancelar_reserva'),
     
-    path('crear_pasaje/', crear_pasaje)
+    path('crear_pasaje/', crear_pasaje, name='crear_pasaje')
 ]

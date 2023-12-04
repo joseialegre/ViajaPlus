@@ -24,13 +24,13 @@
             
             <h1 class="text-center fw-bold">VIAJA-PLUS</h1>
             
-            <form id="formReservas" action="">
-                
+            <form id="formReservas" action="{% url 'crear_pasaje' %}" method="post">
+                {% csrf_token %}
                 <div id="first-form" class="d-flex flex-column align-content-center">
 
-                    <input class="form-control-sm mb-2" type="text" placeholder="DNI del pasajero">
+                    <input required id="dniPasajero" name="DNI" class="form-control-sm mb-2" type="text" placeholder="DNI del Pasajero">
                     
-                    <select class="form-control-sm" id="itinerarios" onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                    <select class="form-control-sm" id="itinerarios" onfocus='this.size=4;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                         <option disable>Seleccione un itinerario</option>
                         {% for itinerario in itinerarios %}
                             <option value="{{ itinerario.codigo }}">
@@ -47,8 +47,7 @@
 
                 </div>
                 
-                <div id="list-services" class="d-flex flex-column align-content-center d-none" >
-                    
+                <div id="list-services" class="d-flex flex-column align-content-center d-none" >      
                 </div>
 
             </form>
