@@ -74,6 +74,10 @@ def obtener_reservas(request, dni):
 
 def consultar_disponibilidad(servicio_id):
     servicio = Servicio.objects.get(numero_servicio=servicio_id)
+    
+    servicio.disponibilidad = servicio.disponibilidad - 1
+    servicio.save()
+    
     if servicio.disponibilidad > 0:
         return True
     else:
@@ -104,3 +108,5 @@ def crear_pasaje(request):
 def prueba(request):
     return render(request, 'prueba.html')
 
+def reservas(request):
+    return render(request, 'pasajes.html')
