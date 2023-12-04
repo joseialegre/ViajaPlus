@@ -1,22 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Tu código JavaScript aquí
+
     var origenes = document.getElementById('origen-container');
     var destinos = document.getElementById('destino-container');
     var form = document.getElementById('first-form');
-    var botonAgregado = false;
+    var botonAgregado = false; // Bandera para verificar si el botón ya fue agregado
 
     document.getElementById('itinerarios').addEventListener('change', function () {
         var itinerarioId = this.value;
+        
+        if (botonAgregado) {
+            botonServicio = document.getElementById('ver-servicios');
+            botonServicio.parentNode.removeChild(botonServicio);
+            botonAgregado = false;
+        }
 
         fetch('/obtener_paradas_intermedias/' + itinerarioId + '/')
             .then(response => response.json())
             .then(data => {
+
                 actualizarOpciones('origen', data.paradas_intermedias);
                 actualizarOpciones('destino', data.paradas_intermedias);
 
                 // Deshabilitar todos los destinos al inicio
                 deshabilitarDestinos();
-                botonAgregado = false; // Reiniciar la bandera cuando cambia el itinerario
+                
             })
             .catch(error => console.error('Error:', error));
     });
@@ -96,15 +103,16 @@ document.addEventListener('DOMContentLoaded', function () {
         // Verificar si ambos radios de origen y destino están seleccionados y si el botón no ha sido agregado previamente
         if (radioOrigenSeleccionado && radioDestinoSeleccionado && !botonAgregado) {
             agregarBoton(); // Agregar el botón al formulario
-            botonAgregado = true; // Marcar que el botón ha sido agregado
+            botonAgregado = true; // Cambiar la bandera para que no se agregue más de una vez
         }
     }
 
     function agregarBoton() {
-        var boton = document.createElement('button');
-        boton.id = 'ver-servicios';
-        boton.type = 'button';
-        boton.textContent = 'Ver Servicios';
-        form.appendChild(boton);
+        var nuevoBoton = document.createElement('button');
+        nuevoBoton.id = 'ver-servicios';
+        nuevoBoton.type = 'button';
+        nuevoBoton.textContent = 'Ver Servicios';
+        form.appendChild(nuevoBoton);
+        botonAgregado = true;
     }
 });
