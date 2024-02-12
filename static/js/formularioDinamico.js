@@ -28,12 +28,17 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error:', error));
     });
 
-    function deshabilitarDestinos() {
-        var radiosDestino = destinos.querySelectorAll('input[type="radio"]');
-        radiosDestino.forEach(function (radio) {
-            radio.disabled = true;
-        });
-    }
+function deshabilitarDestinos() {
+    var radiosDestino = destinos.querySelectorAll('input[type="radio"]');
+    radiosDestino.forEach(function (radio) {
+        radio.disabled = true;
+        var label = radio.previousElementSibling; // Obtener el label asociado al radio button
+        if (label) {
+            label.style.textDecoration = 'line-through'; // Tachar el texto del label
+            label.classList.add('disabled'); // Agregar una clase para deshabilitar visualmente el label
+        }
+    });
+}
 
     function actualizarOpciones(selectId, opciones) {
         var container = document.getElementById(selectId + '-container');
@@ -92,6 +97,11 @@ document.addEventListener('DOMContentLoaded', function () {
         radiosDestino.forEach(function (radio, index) {
             if (index >= desdeIndice) {
                 radio.disabled = false;
+                var label = radio.previousElementSibling; // Obtener el label asociado al radio button
+                if (label) {
+                    label.style.textDecoration = 'none'; // Eliminar el tachado del texto del label
+                    label.classList.remove('disabled'); // Eliminar la clase para deshabilitar visualmente el label
+                }
             }
         });
     }

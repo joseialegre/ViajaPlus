@@ -36,7 +36,6 @@ def obtener_servicios_itinerarios(request, itinerario_id):
             FROM servicio AS s
             INNER JOIN transporte AS t ON s.transporte = t.codigo
             WHERE itinerario = %s
-            AND partida >= CURDATE()
             ORDER BY partida ASC
         ''', [itinerario_id])
 
