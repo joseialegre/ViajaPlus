@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Viaja Plus</title>
+
+    <link rel="stylesheet" href="{% static 'css/pasajes.css' %}">
+    
+    <!-- Bootstrap 5 CSS bundle -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    
+    <div id="containerBody" class="rounded-3">
+        <h1 class="text-center fw-bold">VIAJA-PLUS</h1>
+        <h2 class="text-center fw-bold">RESERVAS</h1>
+        <div class="container mt-5">
+            <div class="row">
+                {% for pasaje in pasajes %}
+                <div class="col-md-4 mb-4">
+                    <div class="card my-card-style">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ pasaje.origen }} - {{ pasaje.destino }}</h5>
+                            <p class="card-text">Número de pasaje: {{ pasaje.idPasaje }}</p>
+                            <p class="card-text">Tipo: {{ pasaje.tipo }}</p>
+                            <p class="card-text">Calidad: {{ pasaje.calidad }}</p>
+                            <p class="card-text">Partida: {{ pasaje.partida|date:"d F, Y, H:i" }}</p>
+                            <p class="card-text">Llegada: {{ pasaje.llegada|date:"d F, Y, H:i" }}</p>
+                            {% if pasaje.pagado == 0 %}
+                                <a href="{% url 'pagar_pasaje' pasaje.idPasaje %}" class="btn btn-success">Pagar</a>
+                                <a href="{% url 'cancelar_reserva' pasaje.idPasaje %}" class="btn btn-danger">Cancelar Reserva</a>
+                            {% else %}
+                                <p class="text-success">Pagado</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+</html>

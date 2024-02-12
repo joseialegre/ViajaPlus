@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [STATIC_DIR, '/var/www/static']
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,20 +27,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7sf_zqwl*mhlkf-&&v3df1nc@&*ti6yrn79@89si!^i1vez--^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app1'
 ]
 
 MIDDLEWARE = [
@@ -52,9 +58,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'ViajaPlus.urls'
 
 TEMPLATES = [
+
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,6 +72,8 @@ TEMPLATES = [
             ],
         },
     },
+
+
 ]
 
 WSGI_APPLICATION = 'ViajaPlus.wsgi.application'
@@ -75,8 +84,12 @@ WSGI_APPLICATION = 'ViajaPlus.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bub2hoobeupkmqfwhji4',
+        'USER': 'uidsh5emlx1jj8rv',
+        'PASSWORD': 'WycTnga1xBpEJGwiZTvZ',
+        'HOST': 'bub2hoobeupkmqfwhji4-mysql.services.clever-cloud.com',
+        'PORT':'3306',
     }
 }
 

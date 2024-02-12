@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+body {
+    font-family: 'Roboto Slab', sans-serif !important;
+    background-image: url("../media/paisaje-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#containerBody {
+    min-width: 80vw;
+    min-height: 80vh;
+    max-width: 80vw;
+    max-height: 80vh;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    background: rgba(106,135,155,0.3);
+    backdrop-filter: blur(4px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#containerReservas {
+    width: 50%;
+    height: 80%;
+    
+    overflow-y: scroll;
+
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items:normal;
+
+    
+    background: rgba( 255, 255, 255, 0.2 );
+    box-shadow: 0 8px 32px 0 rgba(19, 20, 27, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+#origen-container {
+    border-right: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+form input, form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 5px;
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+    background: rgba( 255, 255, 255, 0.2 );
+    box-shadow: 0 8px 16px 0 rgba(19, 20, 27, 0.37);
+    font-size: 1em;
+    cursor: pointer;
+}
+
+form select {
+    overflow-y: scroll;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.paradasLabel {
+    font-size: 0.9em;
+}
+
+.servicioLabel {
+    background: rgba( 255, 255, 255, 0.2 ); 
+    box-shadow: 0 8px 32px 0 rgba(19, 20, 27, 0.37);
+    cursor: pointer;
+}
+.servicioLabel:hover {
+    background: rgba( 255, 255, 255, 0.6 );
+    box-shadow: 0 8px 32px 0 rgba(19, 20, 27, 0.37);
+}
+.servicioLabel:has(:checked) {
+    background: rgba( 255, 255, 255, 0.6 );
+    box-shadow: 0 8px 32px 0 rgba(19, 20, 27, 0.37);
+}
+
+form input[type="radio"] {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    width: 1em;
+    height: 1em;
+    border: 0.1em solid;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+form input[type="radio"]::before {
+    content: "";
+    background-color: black;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+}
+input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+form input:hover {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 16px 0 rgba(19, 20, 27, 0.37);
+}
+form button {
+    font-size: 1rem;
+}
+form button:hover {
+    background: rgba( 255, 255, 255, 0.6 );
+    box-shadow: 0 8px 16px 0 rgba(19, 20, 27, 0.37);
+}
+
+a,
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+    background: rgba( 255, 255, 255, 0.6 );
+    box-shadow: 0 8px 16px 0 rgba(19, 20, 27, 0.37);
+}

@@ -1,0 +1,81 @@
+/* Agrega estos estilos para integrar con tu código Django */
+p{
+    margin-bottom: 0.5rem;
+}
+
+.container {
+    background-image: none; /* Elimina el fondo de body para evitar duplicación */
+}
+
+body {
+    font-family: 'Roboto Slab', sans-serif !important;
+    background-image: url("../media/paisaje-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#containerBody {
+    min-width: 80vw;
+    min-height: 80vh;
+    max-width: fit-content;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    background: rgba(106,135,155,0.3);
+    backdrop-filter: blur(4px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-card-style {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px; /* Añade un espacio entre las tarjetas */
+}
+
+.my-card-style img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%; /* Hace que la imagen ocupe el 100% del ancho del contenedor */
+    height: 200px; /* Ajusta la altura de la imagen según tus necesidades */
+    object-fit: cover; /* Mantiene la relación de aspecto de la imagen */
+}
+
+.my-card-style .card-body {
+    padding: 1.25rem;
+}
+
+.my-card-style .card-footer {
+    background: rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 0.75rem 1.25rem;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.my-card-style .card-title,
+.my-card-style .card-text,
+.my-card-style .btn-success {
+    color: #000; /* Cambia el color del texto según tus preferencias */
+}
+
+.my-card-style .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.my-card-style .btn-success:hover {
+    background-color: #218838;
+}
+

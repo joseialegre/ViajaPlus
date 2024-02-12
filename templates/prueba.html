@@ -1,0 +1,30 @@
+<!-- servicios.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Servicios</title>
+</head>
+<body>
+    <h1>Reservar pasajes</h1>
+    <form method="post" action="crear_pasaje/">
+        {% csrf_token %}
+    
+        <label for="origen">origen:</label>
+        <input type="text" id="origen" name="origen" required>
+        
+        <label for="destino">destino:</label>
+        <input type="text" id="destino" name="destino" required>
+    
+        <label for="id_servicio">Servicio:</label>
+        <select id="id_servicio" name="servicio" required>
+            <option value="11">11</option>
+            <option value="14">14</option>
+        </select>
+    
+        <label for="id_DNI">DNI:</label>
+        <input type="number" id="DNI" name="DNI" required>
+    
+        <button type="submit">Guardar Pasaje</button>
+    </form>
+</body>
+</html>
