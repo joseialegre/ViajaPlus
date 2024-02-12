@@ -1,9 +1,7 @@
 # Viaja Plus
 ## Sistema de Reserva de Pasajes
 
-Mira este video para obtener una demostración del proyecto en acción:
-
-![](https://github.com/joseialegre/ViajaPlus/ViajaPlus.gif)
+![](https://github.com/joseialegre/ViajaPlus/blob/main/ViajaPlus.gif)
 
 ### Descripción General:
 Este proyecto fue desarrollado como el proyecto final para la materia "Diseño y Administración de Bases de Datos". La tarea consistió en la creación de una aplicación de reserva de pasajes desde cero, incluyendo el diseño y la implementación del esquema de la base de datos, así como el desarrollo de una interfaz visual para su utilización.
