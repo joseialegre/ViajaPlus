@@ -76,7 +76,7 @@ class Transporte(models.Model):
     codigo = models.CharField(primary_key=True, max_length=45)
     calidad = models.CharField(max_length=45, blank=True, null=True)
     tipo = models.CharField(max_length=45, blank=True, null=True)
-    disponibilidad = models.CharField(max_length=45, blank=True, null=True)
+    cantidad_asientos = models.CharField(max_length=45, blank=True, null=True)
 
     def __str__(self):
         return str(self.codigo)
